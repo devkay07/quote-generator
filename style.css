@@ -17,6 +17,7 @@ body {
 }
 
 .quote-container {
+  margin: 10%;
   box-shadow: 0 0 5px 0 ;
   background: inherit; 
   backdrop-filter: blur(10px);
