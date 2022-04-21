@@ -3,18 +3,22 @@ const quoteText = document.getElementById('quote');
 const authorText = document.getElementById('author');
 const twitterBtn = document.getElementById('twitter');
 const newQuoteBtn = document.getElementById('new-quote');
-const loader = document.getElementById('loader');
+
+let loader = document.getElementById('loader'),
+    footer = document.querySelector(".footer");
 
 // Show Loading
 function loading() {
     loader.hidden = false;
     quoteContainer.hidden = true;
+    footer.hidden = true;
 }
 
 // Hide Loading
 function complete() {
     if (!loader.hidden) {
         quoteContainer.hidden = false;
+        footer.hidden = false;
         loader.hidden = true;
     }
 }
@@ -29,9 +33,9 @@ async function getQuote() {
         const data = await response.json();
         // If Author is blank, add 'Unknown'
         if (data.quoteAuthor === '') {
-            authorText.innerText = 'Anonymous';
+            authorText.innerText = '-Anonymous';
         } else {
-            authorText.innerText = data.quoteAuthor;
+            authorText.innerText = `-${data.quoteAuthor}`;
         }
         // Reduce font size for long quotes
         if (data.quoteText.length > 120) {
@@ -59,6 +63,5 @@ function tweetQuote() {
 newQuoteBtn.addEventListener('click', getQuote);
 twitterBtn.addEventListener('click', tweetQuote);
 
-//Call
+//AutoCall when website loads
 getQuote();
-
